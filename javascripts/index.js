@@ -1,12 +1,9 @@
-var createCORSRequest = function(method, url) {
+var createCORSRequest = function(method, url, params) {
   var xhr = new XMLHttpRequest();
+
   if ("withCredentials" in xhr) {
-    // Most browsers.
     xhr.open(method, url, true);
-  } else if (typeof XDomainRequest != "undefined") {
-    // IE8 & IE9
-    xhr = new XDomainRequest();
-    xhr.open(method, url);
+    // xhr.setRequestHeader('If-None-Match', lastETagFor(url))
   } else {
     // CORS not supported.
     xhr = null;
@@ -14,6 +11,12 @@ var createCORSRequest = function(method, url) {
   return xhr;
 };
 
+// function lastETagFor(url) {
+//   var etag = localStorage.getItem(url)
+//   console.log("etag: ", etag, url)
+//   return etag
+// }
+//
 function fetchApp(repoUrl) {
   var tree;
   var manifest;
@@ -23,6 +26,10 @@ function fetchApp(repoUrl) {
     var xhr = createCORSRequest('GET', url);
 
     xhr.onload = function(e) {
+      // var etag = xhr.getResponseHeader('ETag')
+      // if(etag) { localStorage.setItem(url, etag) }
+      //
+      // console.log(xhr.response)
       var lastTag = JSON.parse(xhr.response)[0]
       if(lastTag) { getTree(userAndProject, lastTag.commit.sha) }
     };
@@ -36,8 +43,8 @@ function fetchApp(repoUrl) {
 
 
   function getTree(userAndProject, sha) {
-    var url = 'https://api.github.com/repos/' + userAndProject + '/git/trees/' + sha + '?recursive=1';
-    var xhr = createCORSRequest('GET', url);
+    var url = 'https://api.github.com/repos/' + userAndProject + '/git/trees/' + sha;
+    var xhr = createCORSRequest('GET', url, ['recursive=1']);
 
     xhr.onload = function(e) {
       tree = JSON.parse(xhr.response).tree
@@ -123,5 +130,24 @@ function fetchApp(repoUrl) {
   getTags(repoUrl.replace("https://github.com/", ""));
 }
 
-fetchApp("https://github.com/hivewallet/hiveapp-supporthive")
+function listApps(){
+  var url = 'https://github.com/hivewallet/hive-osx/wiki/App-Registry'
+  bitcoin.makeRequest(url, {
+    success: function(data) {
+      var container = document.createElement("div")
+      var doc = document.createDocumentFragment().appendChild(container)
+      container.innerHTML = data
+
+      Array.prototype.forEach.call(doc.querySelectorAll('.markdown-body li a'), function(link) {
+        console.log(link.href)
+        setTimeout(function(){ fetchApp(link.href) }, 0)
+      })
+    },
+    error: function(){
+      console.error("error", arguments)
+    }
+  })
+}
+
+listApps()
 
