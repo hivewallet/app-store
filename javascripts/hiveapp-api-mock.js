@@ -3,7 +3,7 @@
  *
  * Licensed under the MIT License.
  *
- * v1.0.0
+ * v1.0.1
  */
 
 var bitcoin = bitcoin || mockBitcoin()
@@ -25,6 +25,50 @@ function mockBitcoin() {
   var locale = navigator.language;
 
   function async(fn) { setTimeout(fn, 0) }
+  function createCORSRequest(method, url) {
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr) {
+      xhr.open(method, url, true);
+    } else if (typeof XDomainRequest != "undefined") {
+      xhr = new XDomainRequest();
+      xhr.open(method, url);
+    } else {
+      throw new Error('CORS not supported');
+    }
+    return xhr;
+  }
+
+  function ajax(url, options) {
+    options = options || {}
+    options.type = options.type || "GET"
+    options.dataType = options.dataType || "json"
+    options.success = options.success || function(){}
+    options.failure = options.failure || function(){}
+    options.complete = options.complete ||  function(){}
+
+    var xhr = createCORSRequest(options.type, url)
+    xhr.responseType = options.dataType
+
+    xhr.onload = function(event) {
+      options.success(xhr.response, xhr.status)
+    };
+
+    xhr.onerror = function(event) {
+      options.error(xhr.response, xhr.status, xhr.statusText)
+    };
+
+    xhr.onloadend = function(event) {
+      options.complete(xhr.response, xhr.status, xhr.statusText)
+    };
+
+    var data = new FormData();
+    if(options.data) {
+      for(var key in options.data) {
+        data.append(key, options.data[key])
+      }
+    }
+    xhr.send(data);
+  }
 
   return {
     BTC_IN_SATOSHI: _BTC_IN_SATOSHI,
@@ -115,8 +159,8 @@ function mockBitcoin() {
     },
 
     makeRequest: function(endpoint, args){
-      args['url'] = endpoint.replace(/http[s]?:\/\//gi, "http://www.corsproxy.com/");
-      $.ajax(args)
+      var url = endpoint.replace(/http[s]?:\/\//gi, "http://www.corsproxy.com/");
+      ajax(url, args)
     },
 
     userStringForSatoshi: function(satoshiAmount) {
@@ -141,4 +185,5 @@ function mockBitcoin() {
     }
   };
 }
+
 
