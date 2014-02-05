@@ -7,5 +7,5 @@
   "version": "0.0.1",
   "icon": "icon.png",
   "id": "wei_lu.app_store",
-  "accessedHosts": [ "github.com" ]
+  "accessedHosts": [ "hive-app-registry.herokuapp.com" ]
 }
