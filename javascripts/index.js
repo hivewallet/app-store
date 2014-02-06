@@ -1,5 +1,6 @@
+var registryBaseURL = 'http://hive-app-registry.herokuapp.com/'
 function listApps(){
-  var url = 'http://hive-app-registry.herokuapp.com/index.json'
+  var url = registryBaseURL + 'index.json'
   bitcoin.makeRequest(url, {
     success: function(apps) {
       console.log("success: ", apps)
@@ -24,6 +25,8 @@ function displayApp(manifest){
   img.setAttribute('class', "media-object");
   img.setAttribute('height', '64px');
   img.setAttribute('width', '64px');
+  var src = registryBaseURL + manifest.id + '/' + manifest.icon;
+  img.setAttribute('src', src)
 
   var textContainer = document.createElement("div")
   textContainer.setAttribute("class", "media-body")
