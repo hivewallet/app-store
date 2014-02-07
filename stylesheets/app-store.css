@@ -1,62 +1,15 @@
-.nav {
-  position: fixed;
-  height: 40px;
-  top: 0;
+nav{
+  background: url(../images/header_bg.png);
   width: 100%;
-  background: #333;
-  padding: 5px;
+  line-height: 45px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 20px;
+  color: white;
+  font-weight: bold;
 }
 
-body {
-  padding-top: 45px;
+nav img {
+  width: 30px;
 }
 
-a.back {
-  background: #f0ad4e;
-  border: solid #eea236;
-  border-width: 1px 1px 1px 0;
-  /* -moz-border-radius: 0 5px 5px 0; */
-  /* -webkit-border-radius: 0 5px 5px 0; */
-  border-radius: 1px 5px 5px 1px;
-  display: inline-block;
-  height: 28px;
-  line-height: 28px;
-  margin-left: 20px;
-  margin-right: 2px;
-  padding: 0 7px 0 3px;
-  position: relative;
-  text-decoration: none;
-}
-
-a.back:before {
-  background: #f0ad4e;
-  border: solid #eea236;
-  border-width: 0 0 1px 1px;
-  border-radius: 2px 0 2px 2px;
-  content: '';
-  display: block;
-  height: 20px;
-  left: -10px;
-  position: absolute;
-  top: 3px;
-  -moz-transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-  width: 21px;
-}
-
-a.back:hover, a.back:focus {
-  background-color: #ed9c28;
-  border-color: #d58512;
-}
-
-a.back:hover:before, a.back:focus:before {
-  background-color: #ed9c28;
-  border-color: #d58512;
-}
-
-a.back span {
-  color: #fff;
-  position: relative;
-}

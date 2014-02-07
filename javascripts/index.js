@@ -4,9 +4,7 @@ function listApps(){
   bitcoin.makeRequest(url, {
     success: function(apps) {
       console.log("success: ", apps)
-      apps.forEach(function(app){
-        displayApp(app)
-      })
+      apps.forEach(displayApp)
     },
     error: function(){
       console.error("error", arguments)
