@@ -4,6 +4,7 @@ function listApps(){
   bitcoin.makeRequest(url, {
     success: function(apps) {
       console.log("success: ", apps)
+      hideSpinner()
       apps.forEach(displayApp)
     },
     error: function(){
@@ -43,6 +44,10 @@ function displayApp(manifest){
   item.appendChild(textContainer)
 
   document.querySelector(".list-group").appendChild(item)
+}
+
+function hideSpinner(){
+  document.querySelector('.spinner-container').style.setProperty("display", "none")
 }
 
 listApps()

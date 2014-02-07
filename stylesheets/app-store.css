@@ -13,3 +13,20 @@ nav img {
   width: 30px;
 }
 
+.spinner-container {
+  text-align: center;
+}
+
+.spinner {
+  font-size: 30px;
+  -webkit-animation-name: rotateThis;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes "rotateThis" {
+  from { -webkit-transform: scale( 1 ) rotate( 0deg );   }
+  to   { -webkit-transform: scale( 1 ) rotate( 360deg ); }
+}
+
