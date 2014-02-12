@@ -1,11 +1,14 @@
 # App Store
 
-A marketplace for Hive apps. 
-
-If you want your app listed in the App store, go ahead add it to our app registry wiki page: https://github.com/hivewallet/hive-osx/wiki/App-Registry
+A marketplace for Hive apps.
 
 ![screen shot 2014-02-11 at 11 20 51 am](https://f.cloud.github.com/assets/412533/2133713/138ec1b2-92cc-11e3-8487-9d3038f721f6.png)
 
+## Usage
+
+If you want your app listed in the App store, go ahead add it to our app registry wiki page: https://github.com/hivewallet/hive-osx/wiki/App-Registry
+
+Make sure to [tag your releases](http://git-scm.com/book/en/Git-Basics-Tagging) as [App Registry worker](https://github.com/hivewallet/app-registry) only list apps with their latest tagged git release.
 
 ## Development
 
