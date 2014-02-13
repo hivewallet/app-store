@@ -3,7 +3,7 @@
   "description": "A marketplace for Hive apps",
   "author": "Wei Lu",
   "contact": "wei@hivewallet.com",
-  "repo_url": "https://github.com/hivewallet/toolbelt.git",
+  "repoURL": "https://github.com/hivewallet/toolbelt.git",
   "version": "0.0.1",
   "icon": "icon.png",
   "id": "wei_lu.app_store",
