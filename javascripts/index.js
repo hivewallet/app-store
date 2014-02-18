@@ -42,6 +42,18 @@ function displayApp(manifest){
   var button = document.createElement("button")
   button.setAttribute("class", "btn btn-default col-xs-2")
   button.textContent = "Install"
+  button.addEventListener('click', function(e){
+    bitcoin.installApp(registryBaseURL + manifest.id + '.hiveapp', function(err, installed){
+      if (installed) {
+        alert(manifest.name + ' is installed successfully')
+      } else if (err) {
+        alert(err.message);
+      } else {
+        // user cancelled installation - ignore
+      }
+    })
+    console.log('clicked', manifest)
+  })
 
   imageContainer.appendChild(img)
   item.appendChild(imageContainer)
