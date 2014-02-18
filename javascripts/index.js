@@ -1,4 +1,4 @@
-var registryBaseURL = 'http://hive-app-registry.herokuapp.com/'
+var registryBaseURL = 'https://hive-app-registry.herokuapp.com/'
 function listApps(){
   var url = registryBaseURL + 'index.json'
   bitcoin.makeRequest(url, {
