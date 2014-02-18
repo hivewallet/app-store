@@ -4,7 +4,6 @@ nav{
   line-height: 45px;
   padding-left: 15px;
   padding-right: 15px;
-  margin-bottom: 20px;
   color: white;
   font-weight: bold;
 }
@@ -13,7 +12,12 @@ nav img {
   width: 30px;
 }
 
+.list-group-item.row {
+  padding: 15px;
+}
+
 .spinner-container {
+  margin-top: 50px;
   text-align: center;
 }
 

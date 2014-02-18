@@ -14,8 +14,11 @@ function listApps(){
 }
 
 function displayApp(manifest){
-  var item = document.createElement("a")
-  item.setAttribute("class", "list-group-item media")
+  var itemContainer = document.createElement("div")
+  itemContainer.setAttribute("class", "list-group-item row")
+
+  var item = document.createElement("div")
+  item.setAttribute("class", "media col-xs-10")
 
   var imageContainer = document.createElement("div")
   imageContainer.setAttribute("class", "pull-left")
@@ -31,10 +34,14 @@ function displayApp(manifest){
   textContainer.setAttribute("class", "media-body")
 
   var heading = document.createElement("h4")
-  textContainer.setAttribute("class", "media-heading")
+  heading.setAttribute("class", "media-heading")
   heading.innerHTML = manifest.name
 
   var paragraph = document.createTextNode(manifest.author)
+
+  var button = document.createElement("button")
+  button.setAttribute("class", "btn btn-default col-xs-2")
+  button.textContent = "Install"
 
   imageContainer.appendChild(img)
   item.appendChild(imageContainer)
@@ -43,7 +50,10 @@ function displayApp(manifest){
   textContainer.appendChild(paragraph)
   item.appendChild(textContainer)
 
-  document.querySelector(".list-group").appendChild(item)
+  itemContainer.appendChild(item)
+  itemContainer.appendChild(button)
+
+  document.querySelector(".list-group").appendChild(itemContainer)
 }
 
 function hideSpinner(){
