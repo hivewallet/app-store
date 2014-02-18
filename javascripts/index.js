@@ -39,20 +39,15 @@ function displayApp(manifest){
 
   var paragraph = document.createTextNode(manifest.author)
 
+  var buttonContainer = document.createElement("div")
+  buttonContainer.setAttribute("class", "col-xs-2 text-center button-container")
+
   var button = document.createElement("button")
-  button.setAttribute("class", "btn btn-default col-xs-2")
+  button.setAttribute("class", "btn btn-default")
   button.textContent = "Install"
   button.addEventListener('click', function(e){
-    bitcoin.installApp(registryBaseURL + manifest.id + '.hiveapp', function(err, installed){
-      if (installed) {
-        alert(manifest.name + ' is installed successfully')
-      } else if (err) {
-        alert(err.message);
-      } else {
-        // user cancelled installation - ignore
-      }
-    })
-    console.log('clicked', manifest)
+    replaceButtonWithSpinner(buttonContainer, button)
+    installApp(manifest, buttonContainer, button)
   })
 
   imageContainer.appendChild(img)
@@ -63,9 +58,41 @@ function displayApp(manifest){
   item.appendChild(textContainer)
 
   itemContainer.appendChild(item)
-  itemContainer.appendChild(button)
+
+  buttonContainer.appendChild(button)
+  itemContainer.appendChild(buttonContainer)
 
   document.querySelector(".list-group").appendChild(itemContainer)
+}
+
+function replaceButtonWithSpinner(buttonContainer, button){
+  buttonContainer.removeChild(button)
+
+  var spinner = document.createElement('span')
+  spinner.setAttribute('class', "glyphicon glyphicon-refresh spinner")
+  buttonContainer.appendChild(spinner)
+}
+
+function installApp(manifest, buttonContainer, button){
+  bitcoin.installApp(registryBaseURL + manifest.id + '.hiveapp', function(err, installed){
+    if (installed) {
+      replaceSpinnerWithSuccessText()
+    } else if (err) {
+      alert(err.message);
+      replaceSpinnerWithButton()
+    } else {
+      replaceSpinnerWithButton()
+    }
+  })
+
+  function replaceSpinnerWithSuccessText(){
+    buttonContainer.innerHTML = '<span class="text-success">Installed</span>'
+  }
+
+  function replaceSpinnerWithButton(){
+    buttonContainer.innerHTML = ''
+    buttonContainer.appendChild(button)
+  }
 }
 
 function hideSpinner(){
