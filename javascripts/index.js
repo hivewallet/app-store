@@ -32,6 +32,8 @@ function displayApp(manifest){
 
   var textContainer = document.createElement("div")
   textContainer.setAttribute("class", "media-body")
+  var appDetails = manifest.name + " by " + manifest.author + "\n" + manifest.description
+  textContainer.setAttribute("title", appDetails)
 
   var heading = document.createElement("h4")
   heading.setAttribute("class", "media-heading")
