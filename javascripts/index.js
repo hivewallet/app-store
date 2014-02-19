@@ -18,7 +18,7 @@ function displayApp(manifest){
   itemContainer.setAttribute("class", "list-group-item row")
 
   var item = document.createElement("div")
-  item.setAttribute("class", "media col-xs-10")
+  item.setAttribute("class", "media col-xs-9")
 
   var imageContainer = document.createElement("div")
   imageContainer.setAttribute("class", "pull-left")
@@ -40,7 +40,7 @@ function displayApp(manifest){
   var paragraph = document.createTextNode(manifest.author)
 
   var buttonContainer = document.createElement("div")
-  buttonContainer.setAttribute("class", "col-xs-2 text-center button-container")
+  buttonContainer.setAttribute("class", "col-xs-3 text-center button-container")
 
   var button = document.createElement("button")
   button.setAttribute("class", "btn btn-default")
