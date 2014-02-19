@@ -45,7 +45,7 @@ function displayApp(manifest){
   buttonContainer.setAttribute("class", "col-xs-3 text-center button-container")
 
   var button = document.createElement("button")
-  button.setAttribute("class", "btn btn-default")
+  button.setAttribute("class", "btn btn-primary")
   button.textContent = "Install"
   button.addEventListener('click', function(e){
     replaceButtonWithSpinner(buttonContainer, button)
