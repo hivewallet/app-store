@@ -37,7 +37,7 @@ function displayApp(manifest){
   heading.setAttribute("class", "media-heading")
   heading.innerHTML = manifest.name
 
-  var paragraph = document.createTextNode(manifest.author)
+  var paragraph = document.createTextNode(manifest.description)
 
   var buttonContainer = document.createElement("div")
   buttonContainer.setAttribute("class", "col-xs-3 text-center button-container")

@@ -17,6 +17,23 @@ nav img {
   overflow: hidden;
 }
 
+.media-body, .media-heading {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.media-heading {
+  white-space: nowrap;
+}
+
+.media-body {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 16px;     /* fallback */
+  max-height: 4em;      /* fallback */
+}
+
 .list-group-item.row {
   padding: 15px;
 }
