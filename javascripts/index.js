@@ -25,8 +25,8 @@ function displayApp(manifest){
 
   var img = document.createElement("img");
   img.setAttribute('class', "media-object");
-  img.setAttribute('height', '64px');
-  img.setAttribute('width', '64px');
+  img.setAttribute('height', '50px');
+  img.setAttribute('width', '50px');
   var src = registryBaseURL + manifest.id + '/' + manifest.icon;
   img.setAttribute('src', src)
 
