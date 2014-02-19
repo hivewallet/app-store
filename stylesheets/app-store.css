@@ -12,6 +12,11 @@ nav img {
   width: 30px;
 }
 
+.media img {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
 .list-group-item.row {
   padding: 15px;
 }
