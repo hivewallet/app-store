@@ -49,5 +49,48 @@ describe("appElement", function() {
       var args = bitcoin.installApp.calls.mostRecent().args
       expect(args[0]).toEqual('https://hive-app-registry.herokuapp.com/com.hivewallet.bitstamptrader.hiveapp')
     })
+
+    describe("installApp callback", function() {
+      var callback;
+      beforeEach(function(){
+        spyOn(bitcoin, 'installApp')
+        spyOn(window, 'alert')
+        button.click()
+        callback = bitcoin.installApp.calls.mostRecent().args[1]
+      })
+
+      it("replace the button with success text when success", function() {
+        expect(el.textContent).not.toContain('Installed')
+        callback(null, true)
+        expect(el.textContent).toContain('Installed')
+        expect(el.querySelector('button')).toBeNull()
+      })
+
+      context("install failure", function() {
+        it("leave the button be", function() {
+          callback(new Error(), false)
+          expect(el.textContent).not.toContain('Installed')
+          expect(el.querySelector('button')).toBeDefined()
+        })
+
+        it("show an alert with error message", function() {
+          callback(new Error('oh no!'), false)
+          expect(window.alert).toHaveBeenCalledWith('oh no!')
+        })
+      })
+
+      context("user cancels install", function() {
+        it("leave the button be", function() {
+          callback(null, false)
+          expect(el.textContent).not.toContain('Installed')
+          expect(el.querySelector('button')).toBeDefined()
+        })
+
+        it("does not show alert", function() {
+          callback(null, false)
+          expect(window.alert).not.toHaveBeenCalled()
+        })
+      })
+    })
   })
 });
