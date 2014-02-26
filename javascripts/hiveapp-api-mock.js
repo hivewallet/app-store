@@ -3,7 +3,7 @@
  *
  * Licensed under the MIT License.
  *
- * v1.0.1
+ * v1.1.0
  */
 
 var bitcoin = bitcoin || mockBitcoin()
@@ -161,6 +161,18 @@ function mockBitcoin() {
     makeRequest: function(endpoint, args){
       var url = endpoint.replace(/http[s]?:\/\//gi, "http://www.corsproxy.com/");
       ajax(url, args)
+    },
+
+    installApp: function(url, callback){
+      async(function(){
+        callback(null, true)
+      })
+    },
+
+    getApplication: function(appId, callback){
+      async(function(){
+        callback({id: appId, version: '1.0.0'})
+      })
     },
 
     userStringForSatoshi: function(satoshiAmount) {
