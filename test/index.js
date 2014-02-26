@@ -41,10 +41,13 @@ describe("appElement", function() {
       expect(button.textContent).toEqual('Install')
     })
 
-    it("clicks on the button invokes bitcoin.installApp", function() {
+    it("clicks on the button invokes bitcoin.installApp with the app bundle url", function() {
       spyOn(bitcoin, 'installApp')
       button.click()
       expect(bitcoin.installApp).toHaveBeenCalled()
+
+      var args = bitcoin.installApp.calls.mostRecent().args
+      expect(args[0]).toEqual('https://hive-app-registry.herokuapp.com/com.hivewallet.bitstamptrader.hiveapp')
     })
   })
 });
