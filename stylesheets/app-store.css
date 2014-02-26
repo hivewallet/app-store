@@ -24,6 +24,8 @@ nav img {
 
 .media-heading {
   white-space: nowrap;
+  margin: 0;
+  padding-bottom: 2px;
 }
 
 .media-body {
