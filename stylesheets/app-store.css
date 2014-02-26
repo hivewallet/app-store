@@ -38,6 +38,10 @@ nav img {
   padding: 15px;
 }
 
+.list-group-item.row button {
+  min-width: 75px;
+}
+
 .spinner-container {
   margin-top: 50px;
 }
