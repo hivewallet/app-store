@@ -5,7 +5,10 @@ function listApps(){
     success: function(apps) {
       hideSpinner()
       var container = document.querySelector(".list-group")
-      apps.forEach(function(manifest){
+      apps.sort(function(a, b){
+        if(typeof a.name !== "string") return -1
+        return a.name.localeCompare(b.name)
+      }).forEach(function(manifest){
         var item = appElement(manifest)
         container.appendChild(item)
       })
