@@ -3,9 +3,12 @@ function listApps(){
   var url = registryBaseURL + 'index.json'
   bitcoin.makeRequest(url, {
     success: function(apps) {
-      console.log("success: ", apps)
       hideSpinner()
-      apps.forEach(displayApp)
+      var container = document.querySelector(".list-group")
+      apps.forEach(function(manifest){
+        var item = appElement(manifest)
+        container.appendChild(item)
+      })
     },
     error: function(){
       console.error("error", arguments)
@@ -13,7 +16,7 @@ function listApps(){
   })
 }
 
-function displayApp(manifest){
+function appElement(manifest){
   var itemContainer = document.createElement("div")
   itemContainer.setAttribute("class", "list-group-item row")
 
@@ -64,7 +67,7 @@ function displayApp(manifest){
   buttonContainer.appendChild(button)
   itemContainer.appendChild(buttonContainer)
 
-  document.querySelector(".list-group").appendChild(itemContainer)
+  return itemContainer
 }
 
 function replaceButtonWithSpinner(buttonContainer, button){
