@@ -46,14 +46,7 @@ function appElement(manifest){
 
   var buttonContainer = document.createElement("div")
   buttonContainer.setAttribute("class", "col-xs-3 text-center button-container")
-
-  var button = document.createElement("button")
-  button.setAttribute("class", "btn btn-primary")
-  button.textContent = "Install"
-  button.addEventListener('click', function(e){
-    replaceButtonWithSpinner(buttonContainer, button)
-    installApp(manifest, buttonContainer, button)
-  })
+  populateButtonContainer(buttonContainer, manifest)
 
   imageContainer.appendChild(img)
   item.appendChild(imageContainer)
@@ -63,11 +56,27 @@ function appElement(manifest){
   item.appendChild(textContainer)
 
   itemContainer.appendChild(item)
-
-  buttonContainer.appendChild(button)
   itemContainer.appendChild(buttonContainer)
 
   return itemContainer
+}
+
+function populateButtonContainer(buttonContainer, manifest){
+  bitcoin.getApplication(manifest.id, function(app){
+    if(app) {
+      setButtonToSuccessText(buttonContainer)
+    } else {
+      var button = document.createElement("button")
+      button.setAttribute("class", "btn btn-primary")
+      button.textContent = "Install"
+      button.addEventListener('click', function(e){
+        replaceButtonWithSpinner(buttonContainer, button)
+        installApp(manifest, buttonContainer, button)
+      })
+
+      buttonContainer.appendChild(button)
+    }
+  })
 }
 
 function replaceButtonWithSpinner(buttonContainer, button){
@@ -81,7 +90,7 @@ function replaceButtonWithSpinner(buttonContainer, button){
 function installApp(manifest, buttonContainer, button){
   bitcoin.installApp(registryBaseURL + manifest.id + '.hiveapp', function(err, installed){
     if (installed) {
-      replaceSpinnerWithSuccessText()
+      setButtonToSuccessText(buttonContainer)
     } else if (err) {
       alert(err.message);
       replaceSpinnerWithButton()
@@ -90,14 +99,14 @@ function installApp(manifest, buttonContainer, button){
     }
   })
 
-  function replaceSpinnerWithSuccessText(){
-    buttonContainer.innerHTML = '<span class="text-success">Installed</span>'
-  }
-
   function replaceSpinnerWithButton(){
     buttonContainer.innerHTML = ''
     buttonContainer.appendChild(button)
   }
+}
+
+function setButtonToSuccessText(buttonContainer){
+  buttonContainer.innerHTML = '<span class="text-success">Installed</span>'
 }
 
 function hideSpinner(){
