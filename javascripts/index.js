@@ -64,19 +64,27 @@ function appElement(manifest){
 function populateButtonContainer(buttonContainer, manifest){
   bitcoin.getApplication(manifest.id, function(app){
     if(app) {
-      setButtonToSuccessText(buttonContainer)
+      if(app.version === manifest.version){
+        setButtonToSuccessText(buttonContainer)
+      } else {
+        buttonContainer.appendChild(buttonElement('Update'))
+      }
     } else {
-      var button = document.createElement("button")
-      button.setAttribute("class", "btn btn-primary")
-      button.textContent = "Install"
-      button.addEventListener('click', function(e){
-        replaceButtonWithSpinner(buttonContainer, button)
-        installApp(manifest, buttonContainer, button)
-      })
-
-      buttonContainer.appendChild(button)
+      buttonContainer.appendChild(buttonElement('Install'))
     }
   })
+
+  function buttonElement(text) {
+    var button = document.createElement("button")
+    button.setAttribute("class", "btn btn-primary")
+    button.textContent = text
+    button.addEventListener('click', function(e){
+      replaceButtonWithSpinner(buttonContainer, button)
+      installApp(manifest, buttonContainer, button)
+    })
+
+    return button
+  }
 }
 
 function replaceButtonWithSpinner(buttonContainer, button){

@@ -32,7 +32,6 @@ describe("appElement", function() {
 
   context('when the app is installed', function(){
     context('when the app version is the same as that of the manifest', function(){
-
       beforeEach(function(done){
         spyOn(bitcoin, 'getApplication').and.callFake(function(appId, callback){
           setTimeout(function(){
@@ -46,6 +45,22 @@ describe("appElement", function() {
       it('renders text `Installed` instead of the install button', function(){
         expect(el.querySelector('button')).toBeNull()
         expect(el.textContent).toContain('Installed')
+      })
+    })
+
+    context('when the app version different from that of the manifest', function(){
+      beforeEach(function(done){
+        spyOn(bitcoin, 'getApplication').and.callFake(function(appId, callback){
+          setTimeout(function(){
+            callback({id: appId, version: '0.0.1'})
+            done()
+          }, 0)
+        })
+        el = appElement(manifest)
+      })
+
+      it('renders update button', function(){
+        expect(el.querySelector('button').textContent).toEqual('Update')
       })
     })
   })
