@@ -43,7 +43,7 @@ describe("appElement", function() {
       })
 
       it('renders text `Installed` instead of the install button', function(){
-        expect(el.querySelector('button')).toBeNull()
+        expect(el.querySelector('button.btn.btn-primary')).toBeNull()
         expect(el.textContent).toContain('Installed')
       })
     })
@@ -109,7 +109,7 @@ describe("appElement", function() {
           expect(el.textContent).not.toContain('Installed')
           callback(null, true)
           expect(el.textContent).toContain('Installed')
-          expect(el.querySelector('button')).toBeNull()
+          expect(el.querySelector('button.btn.btn-primary')).toBeNull()
         })
 
         context("install failure", function() {
