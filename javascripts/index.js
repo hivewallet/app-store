@@ -117,7 +117,7 @@ function installApp(manifest, buttonContainer, button){
 }
 
 function setButtonToSuccessText(buttonContainer){
-  buttonContainer.innerHTML = '<button class="btn btn-empty text-success">Installed</button>'
+  buttonContainer.innerHTML = '<button class="btn btn-empty text-success" disabled="disabled">Installed</button>'
 }
 
 function hideSpinner(){
