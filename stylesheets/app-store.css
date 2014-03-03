@@ -44,6 +44,10 @@ nav img {
   min-width: 75px;
 }
 
+.btn.btn-empty {
+  background: transparent;
+}
+
 .spinner-container {
   margin-top: 50px;
 }
