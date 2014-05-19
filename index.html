@@ -9,14 +9,19 @@
   </head>
   <body>
   <nav role="navigation">
-    <img src="images/logo.png"></img>
+    <img src="images/logo.png" alt="logo" onclick="showRegistryChooser()">
     <span>Hive App Store</span>
   </nav>
    <div class="spinner-container text-center">
      <span class="glyphicon glyphicon-refresh spinner"></span>
    </div>
+   <div id="registry-chooser" class="text-center">
+     Alternative app registry:
+     <input type="text" name="registry" id="registry">
+     <input type="button" name="refresh" value="Fetch" onclick="switchRegistry()">
+   </div>
    <div class="list-group container">
    </div>
    <script src="javascripts/index.js"></script>
   </body>
-<html>
+</html>

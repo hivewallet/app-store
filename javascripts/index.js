@@ -1,10 +1,13 @@
 var registryBaseURL = 'https://hive-app-registry.herokuapp.com/'
+var logoClicks = 0
+
 function listApps(){
   var url = registryBaseURL + 'index.json'
   bitcoin.makeRequest(url, {
     success: function(apps) {
       hideSpinner()
       var container = document.querySelector(".list-group")
+      container.innerHTML = ''
       apps.sort(function(a, b){
         if(typeof a.name !== "string") return -1
         return a.name.localeCompare(b.name)
@@ -122,6 +125,18 @@ function setButtonToSuccessText(buttonContainer){
 
 function hideSpinner(){
   document.querySelector('.spinner-container').style.setProperty("display", "none")
+}
+
+function showRegistryChooser(){
+  logoClicks += 1;
+  if (logoClicks >= 3){
+    document.getElementById('registry-chooser').style.display = 'block'
+  }
+}
+
+function switchRegistry(){
+  registryBaseURL = document.getElementById('registry').value
+  listApps()
 }
 
 listApps()

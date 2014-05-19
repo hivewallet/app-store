@@ -60,6 +60,11 @@ nav img {
   -webkit-animation-timing-function: linear;
 }
 
+#registry-chooser {
+  font-size: 20px;
+  display:none;
+}
+
 @-webkit-keyframes "rotateThis" {
   from { -webkit-transform: scale( 1 ) rotate( 0deg );   }
   to   { -webkit-transform: scale( 1 ) rotate( 360deg ); }
