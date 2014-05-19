@@ -4,7 +4,7 @@
   "author": "Wei Lu",
   "contact": "wei@hivewallet.com",
   "repoURL": "https://github.com/hivewallet/toolbelt.git",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "icon": "icon.png",
   "id": "wei-lu.app-store",
   "accessedHosts": [ "hive-app-registry.herokuapp.com"
