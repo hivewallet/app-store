@@ -7,7 +7,9 @@
   "version": "1.1.1",
   "icon": "icon.png",
   "id": "wei-lu.app-store",
-  "accessedHosts": [ "hive-app-registry.herokuapp.com" ],
+  "accessedHosts": [ "hive-app-registry.herokuapp.com"
+                   , "hive-app-registry-android.herokuapp.com"
+                   ],
   "apiVersionMajor": 0,
   "apiVersionMinor": 2
 }

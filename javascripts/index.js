@@ -1,6 +1,15 @@
 var registryBaseURL = 'https://hive-app-registry.herokuapp.com/'
 var logoClicks = 0
 
+function selectRegistryAndListApps(){
+  bitcoin.getSystemInfo(function(info){
+    if (info.platform && info.platform === 'android'){
+      registryBaseURL = 'https://hive-app-registry-android.herokuapp.com/'
+    }
+    listApps()
+  })
+}
+
 function listApps(){
   var url = registryBaseURL + 'index.json'
   bitcoin.makeRequest(url, {
@@ -139,5 +148,4 @@ function switchRegistry(){
   listApps()
 }
 
-listApps()
-
+selectRegistryAndListApps()
